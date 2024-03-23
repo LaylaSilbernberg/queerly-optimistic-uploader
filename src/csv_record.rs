@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 pub struct CsvRecord {
     coordinates_lat: f32,
     coordinates_long: f32,
-    titel: String,
+    title: String,
     description: String,
     year: String,
     color: String,
@@ -15,7 +15,7 @@ impl std::fmt::Display for CsvRecord {
         write!(
             f,
             "Coordinates: {}, {},
-titel: {},
+title: {},
 description: {},
 year: {},
 color: {},
@@ -23,7 +23,7 @@ tag: {},
 link: {}",
             self.coordinates_long,
             self.coordinates_lat,
-            self.titel,
+            self.title,
             self.description,
             self.year,
             self.color,
@@ -36,7 +36,7 @@ impl CsvRecord {
     pub fn into_dto(self) -> CsvDto {
         CsvDto {
             coordinates: vec![self.coordinates_long, self.coordinates_lat],
-            titel: self.titel,
+            title: self.title,
             description: self.description,
             year: self.year,
             color: self.color,
@@ -48,7 +48,7 @@ impl CsvRecord {
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct CsvDto {
     coordinates: Vec<f32>,
-    titel: String,
+    title: String,
     description: String,
     year: String,
     color: String,
