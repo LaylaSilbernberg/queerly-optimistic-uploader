@@ -1,0 +1,56 @@
+import {Button, VerticalBox, HorizontalBox, GroupBox, LineEdit, GridBox } from "std-widgets.slint";
+
+export component QueerlyApp inherits Window {
+    out property <string> url <=> edit.text;
+    in property <bool> visible_text: false;
+    in property <string> path;
+    callback click_path <=> pick-file_btn.clicked;
+    callback click_uploader <=> upload-btn.clicked;
+    title: @tr("Queerly Uploader");
+    height: 200px;
+    width: 400px;
+    hor-layout := HorizontalLayout {
+    padding: 20px;
+    spacing: 10px;
+    vert-layout := VerticalLayout {
+        vertical-stretch: 0;
+        line-edit-box := VerticalBox{
+        width: 75%;
+        height: 6%;
+        alignment: start;
+        padding: 0px;
+            edit := LineEdit {
+            placeholder-text: @tr("Input url");
+                }
+            }
+        button-box := VerticalLayout{
+        padding: 10px;
+        padding-left: 0px;
+            HorizontalBox {
+            alignment: start;
+            padding: 0px;
+                pick-file_btn := Button {
+                max-height: 10px;
+                width: 100px;
+                text: "Pick file";
+                    }
+                upload-btn := Button {
+                    max-height: 10px;
+                    width: 100px;
+                    text: "Upload";
+                    }
+                }
+            }
+        path-box :=  VerticalBox {
+        alignment: start;
+        padding: 0px;
+        height: 40px;
+            text := Text {
+                font-size: 15px;
+                text: path;
+                visible: visible_text;
+                }
+            }
+        }
+    }
+}
