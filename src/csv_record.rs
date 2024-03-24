@@ -1,8 +1,8 @@
 use serde::{Deserialize, Serialize};
 #[derive(Debug, PartialEq, Deserialize)]
 pub struct CsvRecord {
-    coordinates_lat: f32,
-    coordinates_long: f32,
+    coordinates_lat: f64,
+    coordinates_long: f64,
     title: String,
     description: String,
     year: String,
@@ -47,7 +47,7 @@ impl CsvRecord {
 }
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct CsvDto {
-    coordinates: Vec<f32>,
+    coordinates: Vec<f64>,
     title: String,
     description: String,
     year: String,

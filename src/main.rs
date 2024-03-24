@@ -89,7 +89,15 @@ fn on_click_uploader(app: QueerlyApp, handle: tokio::runtime::Handle) {
                                 "json is incorrect",
                             ));
                         };
-                        let Ok(result) = client.post(url).body(json).send().await else {
+                        println!("{}", json);
+                        let Ok(result) = client
+                            .post(url)
+                            .header("Accept", "application/json")
+                            .header("Content-Type", "application/json")
+                            .body(json)
+                            .send()
+                            .await
+                        else {
                             return Err(tokio::io::Error::new(
                                 std::io::ErrorKind::AddrNotAvailable,
                                 "Something went wrong with the connection",
@@ -102,7 +110,7 @@ fn on_click_uploader(app: QueerlyApp, handle: tokio::runtime::Handle) {
                     let Ok(nested_result) = result else {
                         return eprintln!("json is malformed");
                     };
-                    if nested_result.status() != reqwest::StatusCode::OK {
+                    if nested_result.status() != reqwest::StatusCode::CREATED {
                         return eprintln!(
                             "Something went wrong! Status: {}",
                             nested_result.status()
